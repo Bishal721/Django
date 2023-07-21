@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
-</head>
-<body>
-    <h1>Hello This is my Page</h1>
-</body>
-</html>
+<h1>This is My Templates</h1>
+
+{%if Blogs%}
+    {%for blog in Blogs %}
+    <h2>{{blog.title}}</h2>
+    <h5>{{blog.description}}</h5>
+    {%endfor%}
+{%endif%}
