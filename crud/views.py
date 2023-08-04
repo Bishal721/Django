@@ -1,30 +1,54 @@
 from django.shortcuts import redirect, render
 from .models import Blog, Contact
 from .forms import BlogForm
-from django.http import HttpResponse
+from django.core.paginator import Paginator
+from django.core.mail import EmailMessage
+from myproject.settings import EMAIL_HOST_USER #replace root with your project name
+from django.template.loader import render_to_string
+
 # Create your views here.
 def homepage(request):
     # return HttpResponse("Hello, This is Bishal's Project")
     blog = Blog.objects.all()
+    paginator = Paginator(blog,2)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    
     data = request.GET.get("search")
     if data != "" and data is not None:
         searchData = Blog.objects.filter(title__contains=data)
         print(searchData)
         return render(request,"crud/index.html",{"blog":searchData})
-    return render(request,"crud/index.html",{"Blogs":blog})
+    return render(request,"crud/index.html",{"Blogs":page_obj})
 
 def contact(request):
+    print(EMAIL_HOST_USER)
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
         message = request.POST.get("message")
+        subject = "Wants to Colloborate !!!"
+        recipient = "Bishal@test.com","bishal@yopmail.com",
+        html_content =render_to_string('crud/email.html',{'name':name,'description':message,'mail':email})
+        email=EmailMessage(
+            subject,
+            html_content,
+            EMAIL_HOST_USER,
+            recipient
+        )
+
+
+        email.fail_silently=False
+        if email!=None:
+            email.send()
+
         crud = Contact(
             name = name,
             email= email,
             message = message
         )
         crud.save()
-        print(crud)
+        print(name,email,message)
         return redirect("crud:home")
 
 
@@ -36,7 +60,6 @@ def particularData(request,id):
 
 def create(request):
     forms = BlogForm(request.POST or None)
-    print(forms)
     if(forms.is_valid()):
         forms.save()
         return redirect("crud:home")
