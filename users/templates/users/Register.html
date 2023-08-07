@@ -1,0 +1,136 @@
+{%extends 'base.html'%} {%load static%} {%block body%}
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('{% static 'assets/img/contact-bg.jpg' %}')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>Sign up </h1>
+          <span class="subheading">Let's Signup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <h4>
+          Signup to use full features of the web application.
+        </h4>
+        <div class="my-5">
+          <form id="contactForm" method="post">
+            {%csrf_token%}
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="id_name"
+                type="text"
+                name="username"
+                required
+                placeholder="Enter your name..."
+              />
+              <label for="id_name">Username</label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A name is required.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                name="email"
+                id="id_email"
+                type="email"
+                required
+                placeholder="Enter your email..."
+              />
+              <label for="id_email">Email address</label>
+              <div class="invalid-feedback" data-sb-feedback="email:required">
+                An email is required.
+              </div>
+              <div class="invalid-feedback" data-sb-feedback="email:email">
+                Email is not valid.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="id_name"
+                type="text"
+                name="firstname"
+                required
+                placeholder="Enter your name..."
+              />
+              <label for="id_name">First Name</label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A name is required.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="id_name"
+                type="text"
+                name="lastname"
+                required
+                placeholder="Enter your name..."
+              />
+              <label for="id_name">Last Name</label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A name is required.
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                name="password"
+                id="id_email"
+                type="password"
+                required
+                placeholder="Enter your email..."
+              />
+              <label for="id_email">Password</label>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                name="confirmpassword"
+                id="id_email"
+                type="password"
+                required
+                placeholder="Enter your email..."
+              />
+              <label for="id_email">confirm Password</label>
+            </div>
+
+            <br />
+
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+              <div class="text-center text-danger mb-3">
+                Error sending message!
+              </div>
+            </div>
+            <!-- Submit Button-->
+            <button
+              class="btn btn-primary text-uppercase"
+              id="submitButton"
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{%endblock%}
