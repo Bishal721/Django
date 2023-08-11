@@ -135,4 +135,6 @@ EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL= "np03cs4s220224@heraldcollege.edu.np"
 
 
+LOGIN_URL = "/users/login/"
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
