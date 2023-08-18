@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.core.mail import EmailMessage
 from myproject.settings import EMAIL_HOST_USER #replace root with your project name
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def homepage(request):
@@ -22,7 +23,6 @@ def homepage(request):
     return render(request,"crud/index.html",{"Blogs":page_obj})
 
 def contact(request):
-    print(EMAIL_HOST_USER)
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
@@ -58,8 +58,10 @@ def particularData(request,id):
     blog = Blog.objects.get(id=id)
     return render(request,"crud/post.html",{"blog":blog})
 
+@login_required
 def create(request):
     forms = BlogForm(request.POST or None)
+    print(forms)
     if(forms.is_valid()):
         forms.save()
         return redirect("crud:home")

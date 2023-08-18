@@ -61,7 +61,8 @@
                 A title is required.
               </div>
             </div>
-
+            
+            
             <div class="form-floating">
               <textarea
                 class="form-control"
@@ -73,9 +74,17 @@
                 data-sb-validations="required"
               >{{description}}</textarea>
               <label for="id_description">Write your description</label>
-              <div class="invalid-feedback" data-sb-feedback="message:required">
-                A message is required.
-              </div>
+              
+            </div>
+
+            <div class="form-floating">
+              <input
+              class="form-control"
+              name="user"
+              type="hidden"
+              required
+              value="{{user.id}}"
+              />
             </div>
             <!-- Submit Button-->
             <button
